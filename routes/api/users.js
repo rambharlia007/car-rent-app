@@ -104,4 +104,61 @@ router.get(
   }
 );
 
+// @route   GET api/users/social
+// @desc    Login
+// @access  Private
+router.post(
+  '/social',
+  (req, res) => {
+    User.findOne({ email: req.body.email }).then((err, user) => {
+      // Check for user
+      if (!user) {
+        const newUser = new User({
+          name: req.body.name,
+          email: req.body.email
+        });
+        newUser
+          .save()
+          .then((user) => {
+            // User Matched
+            const payload = { id: user.id, name: user.name, role: user.role, image: user.image }; // Create JWT Payload
+
+            // Sign Token
+            jwt.sign(
+              payload,
+              keys.secretOrKey,
+              { expiresIn: 3600 },
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: 'Bearer ' + token
+                });
+              }
+            );
+          })
+          .catch(err => console.log(err));
+      } else if (user) {
+        // User Matched
+        const payload = { id: user.id, name: user.name, role: user.role, image: user.image }; // Create JWT Payload
+
+        // Sign Token
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          { expiresIn: 3600 },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: 'Bearer ' + token
+            });
+          }
+        );
+      }
+      else if (err) {
+        res.status(400).send(err)
+      }
+    })
+  }
+);
+
 module.exports = router;

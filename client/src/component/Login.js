@@ -103,9 +103,8 @@ class Login extends Component {
 
     AuthenticateSocial = payload => {
         var self = this;
-        payload.role = this.common;
         axios
-            .post("/auth/login", payload)
+            .post(`${keys.server}/api/users/social`, payload)
             .then(function (response) {
                 self.setTokenAndRoles(response.data);
             })
@@ -174,6 +173,7 @@ class Login extends Component {
             });
     }
 
+
     render() {
         if (this.props.isAuthenticated && this.commonService.isAdmin()) {
             return <Redirect to="/" />;
@@ -192,7 +192,15 @@ class Login extends Component {
                     <h1 className="h3 mb-3 font-weight-normal text-align-center"> Adi's App</h1>
                     <div className="social-login">
                         <button className="btn facebook-btn social-btn" type="button"><span><i className="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
-                        <button className="btn google-btn social-btn" type="button"><span><i className="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
+                        <GoogleLogin
+                            clientId={keys.google.clientID}
+                            buttonText=" Sign in with Google+"
+                            className="btn google-btn social-btn"
+                            style={{}}
+                            onSuccess={(res) => { this.responseGoogle(res) }}
+                            // onFailure={(res) => { this.googleFailure(res) }}
+                            cookiePolicy={'single_host_origin'}
+                        />
                     </div>
                     <p className="text-align-center"> OR  </p>
                     <input type="email" id="inputEmail" className="form-control" placeholder="Email address" name="email"
