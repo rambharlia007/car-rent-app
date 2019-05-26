@@ -60,7 +60,7 @@ class Header extends Component {
                             <li><a href="#services">SERVICES</a></li>
                             <li><a href="#portfolio">PORTFOLIO</a></li>
                             <li><a href="#pricing">PRICING</a></li>
-                            <li><a href="#contact">CONTACT</a></li>
+                            <li><a onClick={()=>{this.logout()}}>LOGOUT</a></li>
                         </ul>
                     </div>
                 </div>

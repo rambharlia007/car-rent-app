@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    if (true || commonService.getLocalStorageData("token")) {
+    if (commonService.getLocalStorageData("token")) {
       this.setState({ isAuthenticated: true });
     }
   }
