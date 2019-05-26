@@ -13,7 +13,7 @@
   }
 
 const production = {
-  server : "https://devon-recruiter-app.herokuapp.com",
+  server : "https://adi-app.herokuapp.com",
   google,
   mongodb,
   outlook
