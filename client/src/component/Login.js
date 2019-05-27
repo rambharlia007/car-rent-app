@@ -6,7 +6,7 @@ import axios from "axios";
 import validator from 'validator';
 import GoogleLogin from "react-google-login";
 import decode from "jwt-decode";
-
+import FacebookLogin from 'react-facebook-login';
 import keys from "../config/keys";
 var $ = require("jquery");
 
@@ -191,7 +191,14 @@ class Login extends Component {
                 <form className="form-signin">
                     <h1 className="h3 mb-3 font-weight-normal text-align-center"> Adi's App</h1>
                     <div className="social-login">
-                        <button className="btn facebook-btn social-btn" type="button"><span><i className="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
+                        {/* <button className="btn facebook-btn social-btn" type="button"><span><i className="fab fa-facebook-f"></i> Sign in with Facebook</span> </button> */}
+                        <FacebookLogin
+                            appId={keys.facebook.clientID}
+                            fields="name,email,picture"
+                           // onClick={componentClicked}
+                            callback={(res)=>{this.responseFacebook(res)}}
+                            cssClass="btn facebook-btn social-btn"
+                        />
                         <GoogleLogin
                             clientId={keys.google.clientID}
                             buttonText=" Sign in with Google+"

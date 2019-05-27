@@ -1,7 +1,10 @@
   const google = {
     clientID:
       "9966865858-fq2it5vet72cbc19ar7okd7dhr7me2n6.apps.googleusercontent.com",
-    clientSecret: "bezbO90M3JRF7MZXSFQeMvYz"
+  }
+  const facebook = {
+    clientID:
+      "672412126506217"
   }
   const mongodb = {
     dbURI:
@@ -13,12 +16,14 @@
 const production = {
   server : "https://adi-app.herokuapp.com",
   google,
-  mongodb
+  mongodb,
+  facebook
 }
 const dev = {
   server : "http://localhost:5000",
   google,
-  mongodb
+  mongodb,
+  facebook
 }
 
 if(process.env.NODE_ENV === 'production'){
